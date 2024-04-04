@@ -1,0 +1,41 @@
+version: '3'
+services:
+  directus:
+    restart: always
+    image: directus/directus:10.10.0
+    ports:
+      - 8055:8055
+    volumes:
+      - ./uploads:/directus/uploads
+    environment:
+      - KEY=lost-boy-kal-sixty-nine
+      - SECRET=lost-boy-kal-sixty-nine
+      - ADMIN_EMAIL=tanyanyiwatinashe7@gmail.com
+      - ADMIN_PASSWORD=Lostboykal69
+      - DATABASE_URL=mysql://tinashe_tanyanyiwa:Lostboykal69@db:3306/tinashes_data
+      - WEBSOCKETS_ENABLED=true
+    depends_on:
+      - db
+
+  frontend:
+    build: 
+      context: ./full-stack-project-with-tatenda
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+
+  db:
+    restart: always
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=tinashes_data
+      - MYSQL_USER=tinashe_tanyanyiwa
+      - MYSQL_PASSWORD=Lostboykal69
+      - MYSQL_ROOT_PASSWORD=Lostboykal69
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - 3307:3306
+
+volumes:
+  db_data:

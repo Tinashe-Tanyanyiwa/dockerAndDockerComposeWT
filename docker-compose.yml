@@ -8,17 +8,17 @@ services:
     volumes:
       - ./uploads:/directus/uploads
     environment:
-      - KEY=lost-boy-kal-sixty-nine
-      - SECRET=lost-boy-kal-sixty-nine
-      - ADMIN_EMAIL=tanyanyiwatinashe7@gmail.com
-      - ADMIN_PASSWORD=Lostboykal69
-      - DATABASE_URL=mysql://tinashe_tanyanyiwa:Lostboykal69@db:3306/tinashes_data
-      - WEBSOCKETS_ENABLED=true
+      - KEY=${KEY}
+      - SECRET=${SECRET}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - DATABASE_URL=${DATABASE_URL}
+      - WEBSOCKETS_ENABLED=${WEBSOCKETS_ENABLED}
     depends_on:
       - db
 
   frontend:
-    build: 
+    build:
       context: ./full-stack-project-with-tatenda
       dockerfile: Dockerfile
     ports:
@@ -28,10 +28,10 @@ services:
     restart: always
     image: mysql:8.0
     environment:
-      - MYSQL_DATABASE=tinashes_data
-      - MYSQL_USER=tinashe_tanyanyiwa
-      - MYSQL_PASSWORD=Lostboykal69
-      - MYSQL_ROOT_PASSWORD=Lostboykal69
+      - MYSQL_DATABASE=${MYSQL_DB}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASS}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASS}
     volumes:
       - db_data:/var/lib/mysql
     ports:
